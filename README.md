@@ -21,5 +21,5 @@ optional arguments:
 
 ## Acknowledgements
 
-This project makes use of gonts protocol buffer definitions from the
+This project makes use of font protocol buffer definitions from the
 [gftools](https://github.com/googlefonts/gftools) repository.

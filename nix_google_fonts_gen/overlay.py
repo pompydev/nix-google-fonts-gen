@@ -4,7 +4,7 @@ import re
 
 from pathlib import Path
 from pipes import quote
-from typing import Iterable
+from typing import Iterable, Tuple, Optional, Set
 from unidecode import unidecode
 
 from nix_google_fonts_gen.repository import Family, Font, families
@@ -84,7 +84,7 @@ LICENSE_MAP = {
 
 
 def create_overlay(repository: Path, overlay: Path):
-    packages = set()
+    packages: Set[str] = set()
     for family in families(repository):
         package = package_derivation(repository, family)
         if package is not None:
@@ -103,7 +103,7 @@ def create_overlay(repository: Path, overlay: Path):
     logging.info("Created %d derivations", len(packages))
 
 
-def package_derivation(repository: Path, family: Family) -> str:
+def package_derivation(repository: Path, family: Family) -> Optional[Tuple[str, str]]:
     """Return nix expression for font family"""
     name = package_name(family)
     sources = "\n".join(font_fetcher(repository, font) for font in family.fonts)
@@ -160,8 +160,8 @@ def font_installer(font: Font) -> str:
     elif ext == ".otf":
         type = "/opentype"
     else:
-        logging.warning("unknown font type: %s", filename)
-        type = "/"
+        logging.warning("Unknown font type: %s", filename)
+        type = ""
     return INSTALL_TEMPLATE.format(file=quote(filename), type=type)
 
 
