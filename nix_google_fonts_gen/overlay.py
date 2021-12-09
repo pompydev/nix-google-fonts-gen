@@ -12,7 +12,7 @@ from nix_google_fonts_gen.repository import Family, Font, families
 FONTS_REPO_URL = "https://github.com/google/fonts"
 
 DERIVATION_TEMPLATE = """
-{{ stdenv, fetchurl }}:
+{{ lib, stdenv, fetchurl }}:
 
 stdenv.mkDerivation rec {{
   name = "{name}-${{version}}";
@@ -34,7 +34,7 @@ stdenv.mkDerivation rec {{
 {install}
   '';
 
-  meta = with stdenv.lib; {{
+  meta = with lib; {{
     description = "{description}";
     license = {license};
     platforms = platforms.all;
