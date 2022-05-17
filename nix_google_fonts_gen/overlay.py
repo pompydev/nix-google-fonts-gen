@@ -145,7 +145,7 @@ def sanitize_string(string: str) -> str:
 
 def font_fetcher(repository: Path, font: Font) -> str:
     """Return fetcher expression for a font file"""
-    url = font_url(repository, font)
+    url = font_url(repository, font).replace("[", "%5B").replace("]", "%5D")
     filename = font.path.name.replace("[", "_").replace("]", "_")
     hash = sha256_hex(font.path)
     return FETCHER_TEMPLATE.format(url=url, name=filename, hash=hash)
