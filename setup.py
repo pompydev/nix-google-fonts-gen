@@ -12,7 +12,7 @@ setup(
     entry_points={
         "console_scripts": ["nix-google-fonts-gen=nix_google_fonts_gen.cli:main"]
     },
-    install_requires=["protobuf", "dataclasses", "unidecode"],
+    install_requires=["protobuf", "unidecode"],
     classifiers=[
         "Topic :: Utilities",
         "Environment :: Console",
