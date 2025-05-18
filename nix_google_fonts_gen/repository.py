@@ -1,6 +1,7 @@
 import hashlib
 import subprocess
 import google.protobuf.text_format as text_format
+import os
 
 from dataclasses import dataclass
 from datetime import datetime
@@ -58,7 +59,7 @@ def families(repository: Path) -> Iterator[Family]:
 def most_recent_commit(repo_root: Path, path: Path) -> str:
     """Return commit hash of the most recent commit that affected path."""
     process = subprocess.run(
-        ["git", "-C", str(repo_root), "rev-list", "-1", "HEAD", str(path)],
+        ["git", "-C", str(repo_root), "rev-list", "-1", "HEAD", os.path.join(*(str(path).split(os.path.sep)[1:]))],
         check=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.DEVNULL,
