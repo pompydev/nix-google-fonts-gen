@@ -66,6 +66,14 @@ message FontProto {
   required string post_script_name = 5;
   required string full_name = 6;
   optional string copyright = 7;
+  optional Position position = 8;
+}
+
+// see https://github.com/google/fonts/issues/6666
+// todo: remove when the issue is resolved
+message Position {
+  required string tag = 1;
+  required float position = 2;
 }
 
 message AxisSegmentProto {
