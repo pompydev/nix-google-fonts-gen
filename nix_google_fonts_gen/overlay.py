@@ -153,7 +153,7 @@ def font_fetcher(repository: Path, font: Font) -> str:
 
 def font_installer(font: Font) -> str:
     """Return command for installing font file"""
-    filename = font.path.name.replace("[", "_").replace("]", "_")
+    filename = font.path.name.replace("[", "_").replace("]", "_").replace(",", "-")
     ext = font.path.suffix.lower()
     if ext == ".ttf":
         type = "/truetype"
